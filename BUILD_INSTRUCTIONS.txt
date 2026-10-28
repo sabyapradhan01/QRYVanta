@@ -1,0 +1,65 @@
+QRYVANTA 1.1.0 — SOURCE BUILD INSTRUCTIONS
+
+REQUIREMENTS
+- Python 3.11 or newer.
+- Windows for the Inno Setup installer. Install Inno Setup separately if you need a Setup.exe.
+- A valid connection to a supported database for live database features.
+- Oracle's SQL*Plus client separately installed for the Oracle console.
+
+1. OPEN THE PROJECT
+Extract QRYVANTA_Updated_Source.zip to a writable folder. Open a terminal in that folder.
+
+2. CREATE A VIRTUAL ENVIRONMENT
+Windows PowerShell:
+  py -3.11 -m venv .venv
+  .venv\Scripts\Activate.ps1
+
+Linux/macOS:
+  python3 -m venv .venv
+  source .venv/bin/activate
+
+3. INSTALL DEPENDENCIES
+  python -m pip install --upgrade pip
+  python -m pip install -r requirements.txt
+
+4. RUN TESTS AND SYNTAX CHECKS
+  python -m unittest discover -s tests -v
+  python -m compileall -q app.py main.py database_view.py adapters analyzer core database linter feature_windows.py learning_content.py quiz_engine.py export_utils.py tools tests
+
+5. RUN THE DESKTOP APP FROM SOURCE
+  python main.py
+
+6. REGENERATE THE STUDY DOCUMENTS
+  python tools/generate_study_documents.py
+This produces the SQL lint/performance Study Guide PDF + DOCX, the Quiz Questions/Answers PDF, and matching Competitive SQL Practice Questions/Solutions DOCX files. The question bank is shared through learning_content.py.
+
+7. BUILD THE DESKTOP BUNDLE
+Windows:
+  build_windows.bat
+Linux/macOS:
+  chmod +x build_unix.sh
+  ./build_unix.sh
+The PyInstaller output is placed under dist/QRYVANTA (Windows: dist\QRYVANTA). Build on the target operating system; a Windows build is not produced by the Unix script and vice versa.
+
+8. BUILD THE OFFLINE WINDOWS INSTALLER
+- Install Inno Setup 6 on the Windows build machine.
+- Run: build_windows.bat
+- Then run: compile_installer.bat
+  (or open QRYVANTA-Setup.iss in Inno Setup Compiler and click Compile.)
+- Output: installer-output\QRYVANTA-Setup-1.1.0-Offline-x64.exe
+The installer installs the complete PyInstaller onedir bundle, README, and the five local study documents. It uses a per-user install path, so admin rights are not normally required. The installed application does not require Python or internet access for its offline learning and quiz features. Build the bundle and installer on Windows; the final installer is not built in this Linux/macOS script environment. The source project intentionally omits prebuilt installer binaries.
+
+9. PREPARE / PUSH THE SOURCE TO GITHUB
+See GITHUB_PUBLISHING.md for safe first-push commands. Create an empty GitHub repository first, review `git status --short` before committing, and never push `.env` files, credentials, local databases, or build output. No personal access token should be embedded in the project.
+
+OPTIONAL APPROVED ASSETS
+- Local learning video: assets/learn.mp4
+- Developer portraits: assets/Dev1.jpg and assets/Dev2.jpg
+- Faculty portrait: assets/fac.jpg
+These photos were absent from the supplied source archive. Add your approved images at these exact paths, then rebuild. The course and developer section still work with fallback avatars if photos are absent.
+
+PEOPLE DISPLAY
+The DEVELOPED BY dialog shows each developer's name and registration number. These values are set in `feature_windows.py` by `DEVELOPER_NAMES` and `DEVELOPER_REGISTRATION_NUMBERS`. The faculty row shows `assets/fac.jpg`, the faculty name `Dr. Swaminathan A`, and `DBMS` beneath the name. Edit `FACULTY_NAME`, `FACULTY_LABEL`, and `FACULTY_PHOTO` near the top of `feature_windows.py` if those details need changing.
+
+SECURITY
+Do not distribute .env files, API keys, private credentials, OS credential-store data or local database files. Review SQL history and processing reports before sharing because they can contain SQL text or schema/business details.

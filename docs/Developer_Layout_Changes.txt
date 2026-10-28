@@ -1,0 +1,8 @@
+QRYVANTA DEVELOPED BY layout refinement
+
+- Developer cards use matching portrait placeholders and reserve a photo status line.
+- Names and registration numbers stay aligned when one or both photos are missing.
+- Faculty portrait and Dr. Swaminathan A / DBMS labels are vertically centered as one compact horizontal group.
+- Photo paths remain assets/Dev1.jpg, assets/Dev2.jpg, and assets/fac.jpg.
+- Copy your actual photo files into the updated project assets folder before rebuilding. They were not present in the supplied source ZIP and therefore are intentionally not embedded here.
+- Verification: 14 automated tests passed; Python compileall passed. The GUI was not launched because PySide6 is unavailable in this environment.

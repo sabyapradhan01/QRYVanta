@@ -1,0 +1,40 @@
+QRYVANTA 1.1.0 — Integrated feature update
+
+Added
+- Header ? menu with LEARN, HELP, QUIZ, COMPETITIVE EXAM, and DEVELOPED BY dialogs.
+- Offline course with SQL concepts, glossary, trusted references, and source-derived summaries for SQL001-SQL015 and P001-P022.
+- Optional local video player for assets/learn.mp4 with fallback when media is missing or unavailable.
+- Randomized offline quiz with 63 original questions, Easy/Medium/Hard selection, unique questions per attempt, shuffled options, required feedback strings, explanations, and topic-level results.
+- Competitive practice browser with topic/difficulty filtering and matching questions-only and solutions DOCX exports. Questions are clearly labeled as original practice, not falsely attributed to past papers.
+- Analyzer DOWNLOAD menu for visible Database Explorer table CSV (headers included), session SQL history TXT, and processing report PDF/DOCX/TXT.
+- Shared Day/Night palette compatible with the five existing theme identities and persisted using QSettings.
+- DEVELOPED BY now shows developer portraits/names/registration numbers and a faculty portrait, faculty name, and DBMS department label.
+- Generated quiz, concept/rule study, and competitive practice documents.
+
+Integration and packaging
+- Kept the existing adapters, SQL console, analyzer/linter, Database Explorer, account UI, original theme definitions, and installer configuration.
+- Updated dependencies, PyInstaller hooks, Inno Setup version/configuration, build scripts, README and ignored artifact patterns.
+- Added pure-logic/export tests and source-level integration guards.
+
+Optional assets absent from supplied ZIP
+- assets/learn.mp4
+- assets/Dev1.jpg
+- assets/Dev2.jpg
+- assets/fac.jpg
+
+People display values are defined near the top of feature_windows.py. `FACULTY_NAME` is “Dr. Swaminathan A”, `FACULTY_LABEL` is “DBMS”, `FACULTY_PHOTO` is “assets/fac.jpg”, and the developer registration numbers are “25BCE1914” and “25BCE5327”. Missing portraits display fallbacks and do not block the dialog.
+
+Revision note (2026-10-28): Updated DEVELOPED BY presentation per user request: each developer's registration number is below their name; the faculty portrait (assets/fac.jpg) sits next to the faculty name, with DBMS below the name.
+
+PACKAGING / PUBLISHING FOLLOW-UP
+-------------------------------
+- Reworked QRYVANTA-Setup.iss to create a per-user x64 offline installer from dist\QRYVANTA.
+- Installer includes local study documents and excludes common secret, credential, log and database file patterns.
+- Added compile_installer.bat and GitHub publishing instructions.
+- Installer build remains Windows-only and must be compiled on a machine with Inno Setup 6.
+
+
+UI refinement (2026-10-28)
+- Reworked DEVELOPED BY into consistent developer cards with equal portrait slots, aligned names and registration numbers, and reserved photo-status space so missing assets do not shift card alignment.
+- Rebalanced the FACULTY panel: portrait and name/DBMS labels are centered together horizontally and vertically, with a compact panel instead of a tall empty region.
+- Applied consistent rounded portrait frames and theme-aware colors for present photos and fallbacks.

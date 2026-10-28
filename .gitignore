@@ -1,0 +1,36 @@
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+build/
+dist/
+*.spec.bak
+qa/
+installer-output/
+*.log
+*.tmp
+
+# Packaging / local development artifacts
+installer-output/
+*.iss.bak
+*.spec.bak
+*.zip
+.DS_Store
+Thumbs.db
+
+# Packaged binaries
+*.exe
+*.msi
+*.7z
